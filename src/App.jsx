@@ -8,8 +8,8 @@ import Home from './pages/HomePage';
 import Login from './pages/auth/LoginPage';
 import Register from './pages/auth/RegisterPage';
 import Header from './components/nav/Header';
-
-
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './theme'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,7 +25,9 @@ function App({ routes }) {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </>
   );
 }
