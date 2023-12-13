@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs, query } from "firebase/firestore";
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '.././theme'
-import Button from '@mui/material/Button';
+import Header from '../components/nav/Header'
+import { Box, Container, Typography, Grid, Button } from "@mui/material";
+import Note from "../components/Note";
 
 
 const Home = () => {
@@ -27,15 +29,35 @@ const Home = () => {
     }, [])
 
     console.log(notes)
+    console.log("hi")
     return (
         <>
-            <ThemeProvider theme={theme}>
-                <Button variant="contained" color="primary">
-                    Primary Button
-                </Button>
+            <Header />
+            <Box sx={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}>
+                {/* Header */}
+                <Box sx={{ bgcolor: "primary", color: "black", padding: "20px" }}>
+                    <Typography variant="h4">My Notes</Typography>
+                </Box>
 
-                <div>home</div>
-            </ThemeProvider>
+                {/* Main content */}
+                <Container maxWidth="lg" sx={{ padding: "16px" }}>
+                    <Grid container spacing={2}>
+                        {/* Add Note Button */}
+                        <Grid item xs={12}>
+                            <Button variant="contained" color="primary" onClick={() => addNote({ title: "New Note", content: "" })}>
+                                Add Note
+                            </Button>
+                        </Grid>
+
+                        {/* Notes list */}
+                        {notes.map((note) => (
+                            <Grid item xs={12} md={6} key={note.title}>
+                                <Note title={note.author} content={note.content} />
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
+            </Box>
         </>
     )
 }

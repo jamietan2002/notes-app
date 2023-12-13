@@ -13,10 +13,12 @@ import { theme } from './theme'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Header />}>
-      <Route index element={<Home />} />
+    <Route>
+      {/* <Route index element={<Header />} /> */}
+      <Route path="home" element={<Home />} />
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
+      <Route path="/" element={<Home />} />
     </Route>
   )
 )

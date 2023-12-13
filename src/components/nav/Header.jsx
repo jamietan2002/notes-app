@@ -41,7 +41,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 // export default Header;
 
 
-export default function Header() {
+const Header = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -56,7 +56,7 @@ export default function Header() {
                         <MenuIcon />
                     </IconButton>
                     <Box sx={{ display: "flex", gap: 2 }}>
-                        <Button component={Link} variant="outline" color="primary" to="/">
+                        <Button component={Link} variant="outline" color="primary" to="/home">
                             Home
                         </Button>
                         <Button component={Link} variant="ouitline" color="primary" to="/register">
@@ -69,3 +69,4 @@ export default function Header() {
         </Box>
     );
 }
+export default Header;
