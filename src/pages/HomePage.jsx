@@ -28,6 +28,8 @@ const Home = () => {
         getNotes()
     }, [])
 
+
+
     console.log(notes)
     console.log("hi")
     return (
