@@ -36,10 +36,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 //             <Outlet />
 //         </>
 
-//     )
-// };
-// export default Header;
-
+//     )note
 
 const Header = () => {
     return (

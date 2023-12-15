@@ -7,6 +7,7 @@ import { theme } from '.././theme'
 import Header from '../components/nav/Header'
 import { Box, Container, Typography, Grid, Button } from "@mui/material";
 import Note from "../components/Note";
+import createNote from '../functions/createNote';
 
 
 const Home = () => {
@@ -28,10 +29,12 @@ const Home = () => {
         getNotes()
     }, [])
 
+    const addNote = async (note) => {
+        const createdNote = createNote(note)
+        setNotes([...notes, createdNote]);
+        console.log(createdNote)
+    }
 
-
-    console.log(notes)
-    console.log("hi")
     return (
         <>
             <Header />
@@ -46,7 +49,7 @@ const Home = () => {
                     <Grid container spacing={2}>
                         {/* Add Note Button */}
                         <Grid item xs={12}>
-                            <Button variant="contained" color="primary" onClick={() => addNote({ title: "New Note", content: "" })}>
+                            <Button variant="contained" color="primary" onClick={() => addNote({ author: "ur mom", content: "hiii" })}>
                                 Add Note
                             </Button>
                         </Grid>
