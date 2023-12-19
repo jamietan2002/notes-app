@@ -29,11 +29,11 @@ const Home = () => {
         getNotes()
     }, [])
 
-    const addNote = async (note) => {
-        const createdNote = createNote(note)
-        setNotes([...notes, createdNote]);
-        console.log(createdNote)
-    }
+    // const addNote = async (note) => {
+    //     const createdNote = createNote(note)
+    //     setNotes([...notes, createdNote]);
+    //     console.log(createdNote)
+    // }
 
     return (
         <>
