@@ -8,19 +8,38 @@ import Header from '../components/nav/Header'
 import { Box, Container, Typography, Grid, Button } from "@mui/material";
 import Note from "../components/Note";
 import createNote from '../functions/createNote';
+import { getAuth } from "firebase/auth";
 
 
 const Home = () => {
     const collectionRef = collection(FIREBASE_DB, 'notes')
     const [notes, setNotes] = useState([]);
+    const auth = getAuth();
+    // const user = auth.currentUser;
+
+    // if (user) {
+    //     console.log(user.email)
+    // } else {
+    //     console.log("user not signed in")
+    // }
 
 
     useEffect(() => {
+        const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+        console.log(user.email)
+    } else {
+        console.log("user not signed in")
+    }
         const getNotes = async () => {
             const q = query(collectionRef)
             await getDocs(q).then((note) => {
                 let noteData = note.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+                noteData = noteData.filter((note) => note.tag.includes(user.email));
                 setNotes(noteData)
+                console.log(noteData)
 
             }).catch((err) => {
                 console.log(err);
@@ -57,7 +76,7 @@ const Home = () => {
                         {/* Notes list */}
                         {notes.map((note) => (
                             <Grid item xs={12} md={6} key={note.title}>
-                                <Note title={note.author} content={note.content} />
+                                <Note title={note.title} summarised={note.summarised} />
                             </Grid>
                         ))}
                     </Grid>
