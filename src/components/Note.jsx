@@ -1,21 +1,20 @@
 import React from "react";
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useState } from 'react';
-
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import { red } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useState } from "react";
 
 // const Note = ({ title, summarised, author, createdDate, tag, content }) => {
 //     return (
@@ -36,33 +35,29 @@ import { useState } from 'react';
 
 // export default Note;
 
-
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
     duration: theme.transitions.duration.shortest,
   }),
 }));
 
-
-const Note = ({ title, summarised, author, createdDate, tag, content }) => {
+const Note = ({ title, summarised, author, createdDate, content,tags }) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  console.log(createdDate)
-
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            M
+            {author.charAt(0).toUpperCase()}
           </Avatar>
         }
         action={
@@ -70,22 +65,22 @@ const Note = ({ title, summarised, author, createdDate, tag, content }) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={title}
-  subheader={
-    <>
-      {createdDate.toDate().toDateString()} by {author.toUpperCase()}
-    </>
-  }
+        title={<Typography variant="h6" fontWeight="600">{title}</Typography>}
+        subheader={
+          <>
+            {createdDate.toDate().toDateString()} by {author.toUpperCase()}
+          </>
+        }
       />
       <CardContent>
         <Typography variant="body2" color="text.primary">
           <ul>
-          {Object.entries(summarised).map(([key, value]) => (
-            <li key={key}>
-              <strong>{key}:</strong> {value}
-            </li>
-          ))}
-        </ul>
+            {Object.entries(summarised).map(([key, value]) => (
+              <li key={key}>
+                <strong>{key}:</strong> {value}
+              </li>
+            ))}
+          </ul>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -107,9 +102,7 @@ const Note = ({ title, summarised, author, createdDate, tag, content }) => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Full Note:</Typography>
-          <Typography paragraph>
-            {content}
-          </Typography>
+          <Typography paragraph>{content}</Typography>
         </CardContent>
       </Collapse>
     </Card>

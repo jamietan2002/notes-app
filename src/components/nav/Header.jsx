@@ -1,18 +1,20 @@
-import { HomeTwoTone, EditTwoTone, CheckCircleTwoTone } from '@ant-design/icons';
-import { Menu } from 'antd';
-import { useState } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import {
+  HomeTwoTone,
+  EditTwoTone,
+  CheckCircleTwoTone,
+} from "@ant-design/icons";
+import { Menu } from "antd";
+import { useState } from "react";
+import { Outlet, Link } from "react-router-dom";
 
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-
-
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 
 // const Header = () => {
 //     const [current, setCurrent] = useState('h');
@@ -39,31 +41,41 @@ import MenuIcon from '@mui/icons-material/Menu';
 //     )note
 
 const Header = () => {
-    return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Box sx={{ display: "flex", gap: 2 }}>
-                        <Button component={Link} variant="outline" color="primary" to="/home">
-                            Home
-                        </Button>
-                        <Button component={Link} variant="ouitline" color="primary" to="/register">
-                            Register
-                        </Button>
-                    </Box>
-                    <Button color="inherit">Login</Button>
-                </Toolbar>
-            </AppBar>
-        </Box>
-    );
-}
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Box sx={{ display: "flex", gap: 2 }}>
+            <Button
+              component={Link}
+              variant="outline"
+              color="primary"
+              to="/home"
+            >
+              Home
+            </Button>
+            <Button
+              component={Link}
+              variant="ouitline"
+              color="primary"
+              to="/register"
+            >
+              Register
+            </Button>
+          </Box>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
+};
 export default Header;
