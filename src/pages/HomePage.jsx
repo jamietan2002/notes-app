@@ -66,20 +66,17 @@ const Home = () => {
           <Typography variant="h4">My Notes</Typography>
         </Box>
 
-        {/* Main content */}
+        <Box sx={{ bgcolor: "primary", color: "black", padding: "20px" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate("/addNote")}
+          >
+            Add Note
+          </Button>
+        </Box>
         <Container maxWidth="lg" sx={{ padding: "16px" }}>
           <Grid container spacing={2}>
-            {/* Add Note Button */}
-            <Grid item xs={12}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => navigate("/addNote")}
-              >
-                Add Note
-              </Button>
-            </Grid>
-
             {/* Notes list */}
             {notes.map((note) => (
               <Grid item xs={12} md={6} key={note.id}>
