@@ -9,7 +9,12 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-import { createUserWithEmailAndPassword, setPersistence, browserSessionPersistence } from "firebase/auth";
+import { Link } from "react-router-dom";
+import {
+  createUserWithEmailAndPassword,
+  setPersistence,
+  browserSessionPersistence,
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 
@@ -17,11 +22,8 @@ const Register = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+
   const isValidEmail = (email) => {
     // Regular expression pattern for email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -40,23 +42,23 @@ const Register = () => {
       return;
     }
     //firebase auth
-    setPersistence(FIREBASE_AUTH, browserSessionPersistence).then(()=> 
-
-    createUserWithEmailAndPassword(FIREBASE_AUTH, email, password, username)
-      .then(async (userCredential) => {
-        //create user in firebase
-        await setDoc(doc(FIREBASE_DB, "users", email), {
-          email: email,
-          username: username,
-        });
-        navigate("/home");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error);
-        alert(error);
-      }))
+    setPersistence(FIREBASE_AUTH, browserSessionPersistence).then(() =>
+      createUserWithEmailAndPassword(FIREBASE_AUTH, email, password, username)
+        .then(async (userCredential) => {
+          //create user in firebase
+          await setDoc(doc(FIREBASE_DB, "users", email), {
+            email: email,
+            username: username,
+          });
+          navigate("/home");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(error);
+          alert(error);
+        })
+    );
   };
 
   return (
@@ -118,6 +120,19 @@ const Register = () => {
               >
                 CREATE ACCOUNT
               </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2" color="textSecondary" align="center">
+                Already have an account?{" "}
+                <Button
+                  component={Link}
+                  variant="ouitline"
+                  color="primary"
+                  to="/login"
+                >
+                  Login here
+                </Button>
+              </Typography>
             </Grid>
           </Grid>
         </Container>
