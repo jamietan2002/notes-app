@@ -13,6 +13,7 @@ import Home from "./pages/HomePage";
 import Login from "./pages/auth/LoginPage";
 import Register from "./pages/auth/RegisterPage";
 import AddNote from "./pages/AddNotePage";
+import StoreNote from "./pages/StoreNotePage";
 import Header from "./components/nav/Header";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./theme";
@@ -25,9 +26,10 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
       <Route path="addNote" element={<AddNote />} />
+      <Route path="storeNote" element={<StoreNote />} />
       <Route path="/" element={<Home />} />
-    </Route>,
-  ),
+    </Route>
+  )
 );
 
 function App({ routes }) {
