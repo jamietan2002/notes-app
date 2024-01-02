@@ -70,7 +70,17 @@ const AddNote = () => {
       tags: tags,
       author: currentUser,
     };
+
+    if (!title.trim()) {
+      alert("Please enter a title for your note.");
+      return; // Prevent further execution
+    }
+    if (!content.trim()) {
+      alert("Please enter content for your note.");
+      return; // Prevent further execution
+    }
     console.log(newNote);
+
     await createNote(newNote).then((summary) => {
       console.log(summary);
       newNote.summary = summary;
