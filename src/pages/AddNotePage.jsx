@@ -104,6 +104,7 @@ const AddNote = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          backgroundColor: "#F5F5F5",
         }}
       >
         {isLoading && (

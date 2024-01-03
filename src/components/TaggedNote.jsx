@@ -43,10 +43,10 @@ const TaggedNote = ({
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 450, margin: 3, borderRadius: "16px" }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: red[300] }} aria-label="recipe">
             {author.charAt(0).toUpperCase()}
           </Avatar>
         }

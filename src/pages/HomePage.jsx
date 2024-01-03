@@ -61,27 +61,19 @@ const Home = () => {
     <>
       <Header />
       <Box
-        sx={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}
+        sx={{
+          flex: 1,
+          padding: "20px",
+          backgroundColor: "#F5F5F5",
+        }}
       >
-        {/* Header */}
-        <Box sx={{ bgcolor: "primary", color: "black", padding: "20px" }}>
-          <Typography variant="h4">My Notes</Typography>
-        </Box>
-
-        <Box sx={{ bgcolor: "primary", color: "black", padding: "20px" }}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => navigate("/addNote")}
-          >
-            Add Note
-          </Button>
-        </Box>
-        <Container maxWidth="lg" sx={{ padding: "16px" }}>
-          <Grid container spacing={2}>
-            {/* Notes list */}
-            {notes.map((note) => (
-              <Grid item xs={12} md={4} key={note.id}>
+        <Grid container spacing={2}>
+          <Box sx={{ flexDirection: "column", padding: "50px" }}>
+            <Typography variant="h6" sx={{}}>
+              My Notes
+            </Typography>
+            <Box sx={{ flexDirection: "column" }}>
+              {notes.map((note) => (
                 <Note
                   id={note.id}
                   title={note.title}
@@ -91,20 +83,28 @@ const Home = () => {
                   createdDate={note.createdDate}
                   tags={note.tags}
                 />
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
+              ))}
+            </Box>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => navigate("/addNote")}
+              sx={{
+                borderRadius: "50px",
+                backgroundColor: "transparent",
+              }}
+              fullWidth="true"
+            >
+              + Add Note
+            </Button>
+          </Box>
 
-        <Box sx={{ bgcolor: "primary", color: "black", padding: "20px" }}>
-          <Typography variant="h4">Tagged Notes</Typography>
-        </Box>
-
-        <Container maxWidth="lg" sx={{ padding: "20px" }}>
-          <Grid container spacing={2}>
-            {/* Notes list */}
-            {tagNotes.map((note) => (
-              <Grid item xs={12} md={4} key={note.id}>
+          <Box sx={{ flexDirection: "column", padding: "50px" }}>
+            <Typography variant="h6" sx={{}}>
+              Tagged Notes
+            </Typography>
+            <Box>
+              {tagNotes.map((note) => (
                 <TaggedNote
                   id={note.id}
                   title={note.title}
@@ -114,10 +114,10 @@ const Home = () => {
                   createdDate={note.createdDate}
                   tags={note.tags}
                 />
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
+              ))}
+            </Box>
+          </Box>
+        </Grid>
       </Box>
     </>
   );
