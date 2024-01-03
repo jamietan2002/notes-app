@@ -45,6 +45,7 @@ const SubmitNote = () => {
       tags: state.tags,
       author: state.author,
       summarised: state.summary,
+      ...(state.id && { id: state.id }),
     };
     console.log(newNote);
     await storeNote(newNote).then(() => {

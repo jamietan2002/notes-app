@@ -14,6 +14,7 @@ import Login from "./pages/auth/LoginPage";
 import Register from "./pages/auth/RegisterPage";
 import AddNote from "./pages/AddNotePage";
 import SubmitNote from "./pages/SubmitNotePage";
+import EditNote from "./pages/EditNotePage";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./theme";
 
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
       <Route path="addNote" element={<AddNote />} />
+      <Route path="editNote" element={<EditNote />} />
       <Route path="submitNote" element={<SubmitNote />} />
       <Route path="/" element={<Home />} />
     </Route>

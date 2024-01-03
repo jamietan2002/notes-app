@@ -2,12 +2,10 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -15,25 +13,8 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
-
-// const Note = ({ title, summarised, author, createdDate, tag, content }) => {
-//     return (
-//         <Box sx={{ padding: "16px", borderRadius: 4, border: "1px solid #ddd", marginBottom: 16 }}>
-//             <Typography variant="h6" fontWeight="bold">Note by: {title}</Typography>
-//             <Typography variant="body1">
-//         <ul>
-//           {Object.entries(summarised).map(([key, value]) => (
-//             <li key={key}>
-//               <strong>{key}:</strong> {value}
-//             </li>
-//           ))}
-//         </ul>
-//       </Typography>
-//         </Box>
-//     );
-// };
-
-// export default Note;
+import { IconButton, Menu, MenuItem, ListItemText } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -46,12 +27,48 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const Note = ({ title, summarised, author, createdDate, content,tags }) => {
+const Note = ({
+  id,
+  title,
+  summarised,
+  author,
+  createdDate,
+  content,
+  tags,
+}) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleEdit = () => {
+    handleClose();
+    const note = {
+      id: id,
+      title: title,
+      content: content,
+      tags: tags,
+    };
+    navigate("/editNote", { state: note });
+  };
+
+  const handleDelete = () => {
+    handleClose();
+  };
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -61,11 +78,34 @@ const Note = ({ title, summarised, author, createdDate, content,tags }) => {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <>
+            <IconButton
+              aria-label="settings"
+              aria-controls={open ? "menu-appbar" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              <MoreVertIcon />
+            </IconButton>
+
+            <Menu
+              id="menu-appbar"
+              aria-labelledby="settings"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleEdit}>Edit</MenuItem>
+              <MenuItem onClick={handleDelete}>Delete</MenuItem>
+            </Menu>
+          </>
         }
-        title={<Typography variant="h6" fontWeight="600">{title}</Typography>}
+        title={
+          <Typography variant="h6" fontWeight="600">
+            {title}
+          </Typography>
+        }
         subheader={
           <>
             {createdDate.toDate().toDateString()} by {author.toUpperCase()}
@@ -103,6 +143,12 @@ const Note = ({ title, summarised, author, createdDate, content,tags }) => {
         <CardContent>
           <Typography paragraph>Full Note:</Typography>
           <Typography paragraph>{content}</Typography>
+          <Typography paragraph>Tags:</Typography>
+          <ul>
+            {tags.map((tag) => (
+              <li key={tag}>{tag}</li>
+            ))}
+          </ul>{" "}
         </CardContent>
       </Collapse>
     </Card>

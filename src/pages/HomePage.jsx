@@ -81,6 +81,7 @@ const Home = () => {
             {notes.map((note) => (
               <Grid item xs={12} md={6} key={note.id}>
                 <Note
+                  id={note.id}
                   title={note.title}
                   summarised={note.summarised}
                   author={note.author}
