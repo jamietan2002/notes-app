@@ -6,6 +6,7 @@ import {
   FormGroup,
   Checkbox,
   FormControlLabel,
+  CircularProgress,
 } from "@mui/material";
 import { pink } from "@mui/material/colors";
 import React from "react";
@@ -29,6 +30,7 @@ const AddNote = () => {
   const [tags, setTags] = useState([]);
   const userRef = collection(FIREBASE_DB, "users");
   const [currentUser, setCurrentUser] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,6 +66,7 @@ const AddNote = () => {
 
   const onSubmit = async (title, content, tags) => {
     // Create new note object and save to database
+    setIsLoading(true);
     const newNote = {
       title: title,
       content: content,
@@ -73,11 +76,13 @@ const AddNote = () => {
 
     if (!title.trim()) {
       alert("Please enter a title for your note.");
-      return; // Prevent further execution
+      setIsLoading(false);
+      return;
     }
     if (!content.trim()) {
       alert("Please enter content for your note.");
-      return; // Prevent further execution
+      setIsLoading(false);
+      return;
     }
     console.log(newNote);
 
@@ -85,13 +90,29 @@ const AddNote = () => {
       console.log(summary);
       newNote.summary = summary;
       navigate("/submitNote", { state: newNote });
+      setIsLoading(false);
     });
   };
 
   return (
     <>
       <Header />
-      <Box sx={{ padding: 3, display: "flex", flexDirection: "column" }}>
+      <Box
+        sx={{
+          padding: 3,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {isLoading && (
+          <CircularProgress
+            size={44}
+            sx={{ marginRight: 10 }}
+            color="inherit"
+          />
+        )}
         <Box sx={{ marginBottom: 2 }}>
           <TextField
             label="Note Title"
@@ -151,6 +172,7 @@ const AddNote = () => {
             variant="contained"
             color="primary"
             type="submit"
+            disabled={isLoading}
             onClick={() => onSubmit(title, content, tags)}
           >
             Add Note

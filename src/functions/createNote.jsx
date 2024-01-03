@@ -19,7 +19,7 @@ const notesRef = doc(collection(FIREBASE_DB, "notes"));
 const createNote = async (data) => {
   //create prompt
   const prompt =
-    "If 'i' is used, replace it with 'Myself'. For each person mentioned in this note, summarise the part that is relevant to the person. Start each person with a number bullet form, in this format: 'name: summary'. " +
+    "If 'i' is used, replace it with 'Myself'. For each person mentioned in this note, summarise the part that is relevant to the person. If no person is mentioned, treat it as a 'Myself'.Start each person with a number bullet form, in this format: 'name: summary'. " +
     data.content;
   console.log(prompt);
 
