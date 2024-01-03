@@ -7,7 +7,7 @@ import { theme } from ".././theme";
 import Header from "../components/nav/Header";
 import { Box, Container, Typography, Grid, Button } from "@mui/material";
 import Note from "../components/Note";
-import createNote from "../functions/createNote";
+import TaggedNote from "../components/TaggedNote";
 import {
   getAuth,
   setPersistence,
@@ -20,6 +20,7 @@ const Home = () => {
   const [notes, setNotes] = useState([]);
   const auth = getAuth();
   const navigate = useNavigate();
+  const [tagNotes, setTagNotes] = useState([]);
 
   useEffect(() => {
     const auth = getAuth();
@@ -36,13 +37,14 @@ const Home = () => {
                 id: doc.id,
               }));
               //user.email
-              noteData = noteData.filter(
-                (note) =>
-                  note.tags.includes(user.email) ||
-                  note.author.includes(user.email)
+              let authorNotes = noteData.filter((note) =>
+                note.author.includes(user.email)
               );
-              setNotes(noteData);
-              console.log(noteData);
+              setNotes(authorNotes);
+              let tagData = noteData.filter((note) =>
+                note.tags.includes(user.email)
+              );
+              setTagNotes(tagData);
             })
             .catch((err) => {
               console.log(err);
@@ -79,8 +81,31 @@ const Home = () => {
           <Grid container spacing={2}>
             {/* Notes list */}
             {notes.map((note) => (
-              <Grid item xs={12} md={6} key={note.id}>
+              <Grid item xs={12} md={4} key={note.id}>
                 <Note
+                  id={note.id}
+                  title={note.title}
+                  summarised={note.summarised}
+                  author={note.author}
+                  content={note.content}
+                  createdDate={note.createdDate}
+                  tags={note.tags}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+
+        <Box sx={{ bgcolor: "primary", color: "black", padding: "20px" }}>
+          <Typography variant="h4">Tagged Notes</Typography>
+        </Box>
+
+        <Container maxWidth="lg" sx={{ padding: "20px" }}>
+          <Grid container spacing={2}>
+            {/* Notes list */}
+            {tagNotes.map((note) => (
+              <Grid item xs={12} md={4} key={note.id}>
+                <TaggedNote
                   id={note.id}
                   title={note.title}
                   summarised={note.summarised}
