@@ -13,8 +13,15 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
-import { IconButton, Menu, MenuItem, ListItemText } from "@mui/material";
+import { IconButton, Menu, MenuItem } from "@mui/material";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import Dialog from "@mui/material/Dialog";
+import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import deleteNote from "../functions/deleteNote";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -66,9 +73,19 @@ const Note = ({
   };
 
   const handleDelete = () => {
+    deleteNote(id);
     handleClose();
+    window.location.reload();
+  };
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+  const handleCloseDeleteDialog = () => {
+    setOpenDeleteDialog(false);
   };
 
+  const handleDeleteDialog = () => {
+    setOpenDeleteDialog(true);
+  };
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -97,7 +114,34 @@ const Note = ({
               onClose={handleClose}
             >
               <MenuItem onClick={handleEdit}>Edit</MenuItem>
-              <MenuItem onClick={handleDelete}>Delete</MenuItem>
+              <MenuItem onClick={handleDeleteDialog}>Delete</MenuItem>
+              <Dialog open={openDeleteDialog} onClose={handleCloseDeleteDialog}>
+                <DialogTitle>Are you sure you want to delete?</DialogTitle>
+                <DialogContent>
+                  <Alert severity="warning">
+                    Clicking "Delete" will permanently delete your note for you
+                    and all tagged users.
+                  </Alert>
+                </DialogContent>
+
+                <DialogActions>
+                  <Button
+                    onClick={handleCloseDeleteDialog}
+                    variant="outline"
+                    color="primary"
+                  >
+                    Cancel
+                  </Button>
+
+                  <Button
+                    onClick={handleDelete}
+                    variant="outline"
+                    color="primary"
+                  >
+                    Delete
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </Menu>
           </>
         }

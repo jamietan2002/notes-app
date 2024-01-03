@@ -24,30 +24,6 @@ import Dialog from "@mui/material/Dialog";
 import { FIREBASE_AUTH } from "../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 
-// const Header = () => {
-//     const [current, setCurrent] = useState('h');
-//     const onClick = (e) => {
-//         console.log('click ', e);
-//         setCurrent(e.key);
-//     };
-//     return (
-//         <>
-//             <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal">
-//                 <Menu.Item key="h" icon={<HomeTwoTone />}>
-//                     <Link to="/">Home</Link>
-//                 </Menu.Item>
-//                 <Menu.Item key="r" icon={<EditTwoTone />} style={{ marginLeft: 'auto' }}>
-//                     <Link to="/register">Register</Link>
-//                 </Menu.Item>
-//                 <Menu.Item key="l" icon={<CheckCircleTwoTone />} >
-//                     <Link to="/login">Login</Link>
-//                 </Menu.Item>
-//             </Menu>
-//             <Outlet />
-//         </>
-
-//     )note
-
 const Header = () => {
   const navigate = useNavigate();
   const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
@@ -61,8 +37,6 @@ const Header = () => {
   };
 
   const handleLogout = async () => {
-    // Perform actual logout logic here (clear session, redirect, etc.)
-    console.log("Logging out...");
     await signOut(FIREBASE_AUTH).then(navigate("/login"));
   };
   return (
