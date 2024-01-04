@@ -14,7 +14,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import Alert from "@mui/material/Alert";
 import DialogActions from "@mui/material/DialogActions";
@@ -47,10 +47,11 @@ const Header = () => {
             size="large"
             edge="start"
             color="inherit"
-            aria-label="menu"
+            aria-label="back"
             sx={{ mr: 2 }}
+            onClick={() => navigate(-1)}
           >
-            <MenuIcon />
+            <ArrowBackIcon />
           </IconButton>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Button

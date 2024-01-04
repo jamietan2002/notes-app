@@ -14,6 +14,14 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const SubmitNote = () => {
   const { state } = useLocation();
+  // const state = {
+  //   title: "hi",
+  //   content: "jamie",
+  //   tags: ["n"],
+  //   author: "jamie",
+  //   summary:
+  //     "I need to complete the code for hybrid search. En ting needs to help me review the code.",
+  // };
 
   const [users, setUsers] = useState([]);
   const [title, setTitle] = useState("");
