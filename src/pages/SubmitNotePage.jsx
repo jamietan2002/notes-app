@@ -78,6 +78,7 @@ const SubmitNote = () => {
           backgroundColor: "#F5F5F5", // Light gray background
           padding: "32px",
           fontFamily: "Roboto, sans-serif", // Readable font family
+          marginTop: "60px",
         }}
       >
         <Container maxWidth="xs" sx={{ padding: "10px" }}>

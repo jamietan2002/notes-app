@@ -33,8 +33,14 @@ const Header = () => {
     await signOut(FIREBASE_AUTH).then(navigate("/login"));
   };
   return (
-    <Box>
-      <AppBar position="static">
+    <>
+      <AppBar
+        position="fixed"
+        sx={{
+          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+          padding: "10px",
+        }}
+      >
         <Toolbar>
           <IconButton
             size="large"
@@ -87,7 +93,7 @@ const Header = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </Box>
+    </>
   );
 };
 export default Header;

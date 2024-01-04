@@ -62,9 +62,10 @@ const Home = () => {
       <Header />
       <Box
         sx={{
-          flex: 1,
+          // flex: 1,
           padding: "20px",
           backgroundColor: "#F5F5F5",
+          marginTop: "60px",
         }}
       >
         <Grid container spacing={3}>

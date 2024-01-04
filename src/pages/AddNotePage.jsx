@@ -107,6 +107,7 @@ const AddNote = () => {
           alignItems: "center",
           backgroundColor: "#F5F5F5",
           width: "100vw",
+          marginTop: "80px",
         }}
       >
         {isLoading && (
