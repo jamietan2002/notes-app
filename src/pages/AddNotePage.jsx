@@ -7,8 +7,9 @@ import {
   Checkbox,
   FormControlLabel,
   CircularProgress,
+  Typography,
 } from "@mui/material";
-import { pink } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import React from "react";
 import { FIREBASE_DB, app } from "../firebaseConfig";
 import { useState, useEffect } from "react";
@@ -19,9 +20,10 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import Header from "../components/nav/Header";
-import { Typography } from "antd";
 import createNote from "../functions/createNote";
 import { useNavigate } from "react-router-dom";
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 
 const AddNote = () => {
   const [users, setUsers] = useState([]);
@@ -102,9 +104,10 @@ const AddNote = () => {
           padding: 3,
           display: "flex",
           flexDirection: "column",
+          padding: "50px",
           alignItems: "center",
-          justifyContent: "center",
           backgroundColor: "#F5F5F5",
+          width: "100vw",
         }}
       >
         {isLoading && (
@@ -114,7 +117,10 @@ const AddNote = () => {
             color="inherit"
           />
         )}
-        <Box sx={{ marginBottom: 2 }}>
+        <Typography variant="h6" margin={3}>
+          ADD NOTE
+        </Typography>
+        <Box sx={{ marginBottom: 2, width: "80%" }}>
           <TextField
             label="Note Title"
             variant="outlined"
@@ -122,9 +128,15 @@ const AddNote = () => {
             required
             onChange={(e) => setTitle(e.target.value)}
             value={title}
+            fullWidth
+            InputProps={{
+              style: {
+                borderRadius: "15px",
+              },
+            }}
           />
         </Box>
-        <Box sx={{ marginBottom: 2 }}>
+        <Box sx={{ marginBottom: 2, width: "80%" }}>
           <TextField
             label="Write your note..."
             variant="outlined"
@@ -134,11 +146,19 @@ const AddNote = () => {
             rows={4}
             onChange={(e) => setContent(e.target.value)}
             value={content}
+            fullWidth={true}
+            InputProps={{
+              style: {
+                borderRadius: "20px",
+              },
+            }}
           />
         </Box>
-        <Box sx={{ marginBottom: 2 }}>
-          <FormControl fullWidth>
-            <Typography variant="h2">Tags (Multiple Choices)</Typography>
+        <Box sx={{ margin: 2, width: "80%" }}>
+          <FormControl fullWidth sx={{ margin: 1 }}>
+            <Typography variant="body1" sx={{ marginBottom: 2 }}>
+              Tags (Multiple Choices)
+            </Typography>
             <FormGroup color="info" name="tags">
               {users.map((user) => (
                 <FormControlLabel
@@ -153,10 +173,12 @@ const AddNote = () => {
                           setTags(tags.filter((t) => t !== user.email));
                         }
                       }}
+                      icon={<BookmarkBorderOutlinedIcon />}
+                      checkedIcon={<BookmarkOutlinedIcon />}
                       sx={{
-                        color: pink[800],
+                        color: grey[900],
                         "&.Mui-checked": {
-                          color: pink[600],
+                          color: grey[700],
                         },
                       }}
                     />
@@ -170,13 +192,13 @@ const AddNote = () => {
 
         <Box sx={{ textAlign: "right" }}>
           <Button
-            variant="contained"
-            color="primary"
+            variant="outlined"
+            color="secondary"
             type="submit"
             disabled={isLoading}
             onClick={() => onSubmit(title, content, tags)}
           >
-            Add Note
+            + Add note
           </Button>
         </Box>
       </Box>

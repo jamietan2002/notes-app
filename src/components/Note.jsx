@@ -157,7 +157,13 @@ const Note = ({
         }
       />
       <CardContent>
-        <Typography variant="body2" color="text.primary">
+        <Typography
+          variant="subtitle1"
+          color="text.primary"
+          fontSize={15}
+          fontWeight={400}
+          lineHeight={2}
+        >
           <ul>
             {Object.entries(summarised).map(([key, value]) => (
               <li key={key}>
@@ -185,14 +191,55 @@ const Note = ({
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Full Note:</Typography>
-          <Typography paragraph>{content}</Typography>
-          <Typography paragraph>Tags:</Typography>
-          <ul>
-            {tags.map((tag) => (
-              <li key={tag}>{tag}</li>
-            ))}
-          </ul>{" "}
+          <Typography
+            paragraph
+            variant="button"
+            color="text.primary"
+            fontSize={15}
+            fontWeight={500}
+            lineHeight={1}
+          >
+            Full Note:
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            color="text.primary"
+            fontSize={15}
+            fontWeight={400}
+            lineHeight={1.5}
+            fontStyle={"italic"}
+          >
+            <ul>
+              <li>{content}</li>
+            </ul>
+          </Typography>
+
+          <Typography
+            paragraph
+            variant="button"
+            color="text.primary"
+            fontSize={15}
+            fontWeight={500}
+            lineHeight={1}
+            marginTop={4}
+          >
+            Tags:
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            color="text.primary"
+            fontSize={15}
+            fontWeight={400}
+            lineHeight={1.5}
+            fontStyle={"italic"}
+          >
+            {" "}
+            <ul>
+              {tags.map((tag) => (
+                <li key={tag}>{tag}</li>
+              ))}
+            </ul>
+          </Typography>
         </CardContent>
       </Collapse>
     </Card>

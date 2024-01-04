@@ -1,17 +1,10 @@
-import {
-  HomeTwoTone,
-  EditTwoTone,
-  CheckCircleTwoTone,
-} from "@ant-design/icons";
-import { Menu } from "antd";
 import { useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -40,7 +33,7 @@ const Header = () => {
     await signOut(FIREBASE_AUTH).then(navigate("/login"));
   };
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
       <AppBar position="static">
         <Toolbar>
           <IconButton

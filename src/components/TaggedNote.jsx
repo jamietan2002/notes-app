@@ -43,7 +43,7 @@ const TaggedNote = ({
   };
 
   return (
-    <Card sx={{ maxWidth: 450, margin: 3, borderRadius: "16px" }}>
+    <Card sx={{ maxWidth: 450, margin: 3, borderRadius: "16px", padding: 1 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[300] }} aria-label="recipe">
@@ -69,7 +69,13 @@ const TaggedNote = ({
         }
       />
       <CardContent>
-        <Typography variant="body2" color="text.primary">
+        <Typography
+          variant="subtitle1"
+          color="text.primary"
+          fontSize={15}
+          fontWeight={400}
+          lineHeight={2}
+        >
           <ul>
             {Object.entries(summarised).map(([key, value]) => (
               <li key={key}>
@@ -97,14 +103,55 @@ const TaggedNote = ({
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Full Note:</Typography>
-          <Typography paragraph>{content}</Typography>
-          <Typography paragraph>Tags:</Typography>
-          <ul>
-            {tags.map((tag) => (
-              <li key={tag}>{tag}</li>
-            ))}
-          </ul>{" "}
+          <Typography
+            paragraph
+            variant="button"
+            color="text.primary"
+            fontSize={15}
+            fontWeight={500}
+            lineHeight={1}
+          >
+            Full Note:
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            color="text.primary"
+            fontSize={15}
+            fontWeight={400}
+            lineHeight={1.5}
+            fontStyle={"italic"}
+          >
+            <ul>
+              <li>{content}</li>
+            </ul>
+          </Typography>
+
+          <Typography
+            paragraph
+            variant="button"
+            color="text.primary"
+            fontSize={15}
+            fontWeight={500}
+            lineHeight={1}
+            marginTop={4}
+          >
+            Tags:
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            color="text.primary"
+            fontSize={15}
+            fontWeight={400}
+            lineHeight={1.5}
+            fontStyle={"italic"}
+          >
+            {" "}
+            <ul>
+              {tags.map((tag) => (
+                <li key={tag}>{tag}</li>
+              ))}
+            </ul>
+          </Typography>
         </CardContent>
       </Collapse>
     </Card>

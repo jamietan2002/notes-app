@@ -67,9 +67,9 @@ const Home = () => {
           backgroundColor: "#F5F5F5",
         }}
       >
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           <Box sx={{ flexDirection: "column", padding: "50px" }}>
-            <Typography variant="h6" sx={{}}>
+            <Typography variant="h6" sx={{ marginLeft: "25px" }}>
               My Notes
             </Typography>
             <Box sx={{ flexDirection: "column" }}>
@@ -86,12 +86,11 @@ const Home = () => {
               ))}
             </Box>
             <Button
-              variant="contained"
-              color="primary"
+              variant="text"
+              color="secondary"
               onClick={() => navigate("/addNote")}
               sx={{
-                borderRadius: "50px",
-                backgroundColor: "transparent",
+                borderRadius: "30px",
               }}
               fullWidth="true"
             >
@@ -100,10 +99,10 @@ const Home = () => {
           </Box>
 
           <Box sx={{ flexDirection: "column", padding: "50px" }}>
-            <Typography variant="h6" sx={{}}>
+            <Typography variant="h6" sx={{ marginLeft: "20px" }}>
               Tagged Notes
             </Typography>
-            <Box>
+            <Box sx={{ flexDirection: "column" }}>
               {tagNotes.map((note) => (
                 <TaggedNote
                   id={note.id}
