@@ -101,10 +101,9 @@ const AddNote = () => {
       <Header />
       <Box
         sx={{
-          padding: 3,
           display: "flex",
           flexDirection: "column",
-          padding: "50px",
+          padding: "10px",
           alignItems: "center",
           backgroundColor: "#F5F5F5",
           width: "100vw",
