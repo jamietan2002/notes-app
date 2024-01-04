@@ -63,7 +63,12 @@ const SubmitNote = () => {
   };
   const onCancel = async () => {
     console.log("cancelling");
-    navigate("/AddNote");
+    const note = {
+      title: state.title,
+      content: state.content,
+      tags: state.tags,
+    };
+    navigate("/AddNote", { state: note });
   };
 
   return (

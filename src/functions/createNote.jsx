@@ -12,7 +12,7 @@ const notesRef = doc(collection(FIREBASE_DB, "notes"));
 
 const createNote = async (data) => {
   const prompt =
-    "If 'i' is used, replace it with 'Myself'. For each person mentioned in this note, summarise the part that is relevant to the person. If no person is mentioned, treat it as a 'Myself'.Start each person with a number bullet form, in this format: 'name: summary'. " +
+    "If 'i' is used, replace it with 'Myself'. For each person mentioned in this note, summarise the part that is relevant to the person, and group each person as 1 bullet point. If no person is mentioned, treat it as a 'Myself'.Start each person with a number bullet form, in this format: 'name: summary'" +
     data.content;
 
   const completion = await openai.chat.completions.create({

@@ -22,6 +22,12 @@ const Home = () => {
   const navigate = useNavigate();
   const [tagNotes, setTagNotes] = useState([]);
 
+  const emptyNote = {
+    title: "",
+    content: "",
+    tags: [],
+  };
+
   useEffect(() => {
     const auth = getAuth();
     setPersistence(auth, browserSessionPersistence).then(() => {
@@ -89,7 +95,7 @@ const Home = () => {
             <Button
               variant="text"
               color="secondary"
-              onClick={() => navigate("/addNote")}
+              onClick={() => navigate("/addNote", { state: emptyNote })}
               sx={{
                 borderRadius: "30px",
               }}

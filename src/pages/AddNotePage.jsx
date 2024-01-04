@@ -21,15 +21,16 @@ import {
 } from "firebase/auth";
 import Header from "../components/nav/Header";
 import createNote from "../functions/createNote";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 
 const AddNote = () => {
+  const { state } = useLocation();
   const [users, setUsers] = useState([]);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [tags, setTags] = useState([]);
+  const [title, setTitle] = useState(state.title);
+  const [content, setContent] = useState(state.content);
+  const [tags, setTags] = useState(state.tags);
   const userRef = collection(FIREBASE_DB, "users");
   const [currentUser, setCurrentUser] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -165,6 +166,7 @@ const AddNote = () => {
                   key={user.email}
                   control={
                     <Checkbox
+                      checked={tags.includes(user.email)}
                       onChange={(event) => {
                         const isChecked = event.target.checked;
                         if (isChecked) {
