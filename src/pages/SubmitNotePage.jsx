@@ -1,4 +1,11 @@
-import { Box, Container, Grid, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid,
+  Button,
+  Typography,
+  TextField,
+} from "@mui/material";
 import React from "react";
 import { FIREBASE_DB, app } from "../firebaseConfig";
 import { useState, useEffect } from "react";
@@ -23,11 +30,8 @@ const SubmitNote = () => {
   //     "I need to complete the code for hybrid search. En ting needs to help me review the code.",
   // };
 
-  const [users, setUsers] = useState([]);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [tags, setTags] = useState([]);
-  const userRef = collection(FIREBASE_DB, "users");
+  const [summary, setSummary] = useState(state.summary);
+
   const [currentUser, setCurrentUser] = useState("");
   const navigate = useNavigate();
 
@@ -52,12 +56,11 @@ const SubmitNote = () => {
       content: state.content,
       tags: state.tags,
       author: state.author,
-      summarised: state.summary,
+      summarised: summary,
       ...(state.id && { id: state.id }),
     };
     console.log(newNote);
     await storeNote(newNote).then(() => {
-      console.log("storing note");
       navigate("/");
     });
   };
@@ -78,44 +81,65 @@ const SubmitNote = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center", // Optional for vertical centering
-          padding: 3,
-          backgroundColor: "#F5F5F5", // Light gray background
-          padding: "32px",
-          fontFamily: "Roboto, sans-serif", // Readable font family
-          marginTop: "60px",
+          padding: "10px",
+          alignItems: "center",
+          backgroundColor: "#F5F5F5",
+          width: "100vw",
+          marginTop: "80px",
         }}
       >
-        <Container maxWidth="xs" sx={{ padding: "10px" }}>
+        <Box
+          sx={{
+            padding: "10px",
+            width: "80%",
+            display: "flex",
+            flexDirection: "column",
+            padding: "10px",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h6" margin={1}>
+            SUMMARY
+          </Typography>
+          <Box sx={{ marginBottom: 2, width: "90%" }}>
+            <TextField
+              label="Edit Summary..."
+              variant="outlined"
+              color="info"
+              required
+              multiline
+              rows={4}
+              onChange={(e) => setSummary(e.target.value)}
+              value={summary}
+              fullWidth={true}
+              InputProps={{
+                style: {
+                  borderRadius: "20px",
+                },
+              }}
+            />
+          </Box>
           <Grid container spacing={2}>
-            <Grid item xs={12} md={12} sx={{ mt: 2 }}>
-              <Typography variant="h4" sx={{ lineHeight: 1.5, mt: 2 }}>
-                Summary
-              </Typography>
-              <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
-                {state.summary}
-              </Typography>
-            </Grid>
-            <Grid item xs={12} display="flex" justifyContent="space-between">
+            <Grid item xs={12} display="flex" justifyContent="space-evenly">
               <Button
-                variant="contained"
-                color="primary"
-                sx={{ mt: 2, mb: 2 }}
-                onClick={() => onSubmit()}
-              >
-                Submit
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
+                variant="outlined"
+                color="error"
                 sx={{ mt: 2, mb: 2 }}
                 onClick={() => onCancel()}
               >
                 Cancel
               </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                sx={{ mt: 2, mb: 2 }}
+                onClick={() => onSubmit()}
+              >
+                Submit
+              </Button>
             </Grid>
           </Grid>
-        </Container>
+        </Box>
       </Box>
     </>
   );
