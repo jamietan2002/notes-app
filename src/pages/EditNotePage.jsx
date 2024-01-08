@@ -9,6 +9,8 @@ import {
   CircularProgress,
   Typography,
   Stack,
+  Popover,
+  IconButton,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React from "react";
@@ -25,6 +27,7 @@ import createNote from "../functions/createNote";
 import { useNavigate, useLocation } from "react-router-dom";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 const EditNote = () => {
   const { state } = useLocation();
@@ -36,6 +39,17 @@ const EditNote = () => {
   const [currentUser, setCurrentUser] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   useEffect(() => {
     // Fetch users from users collection and store in state
@@ -121,7 +135,7 @@ const EditNote = () => {
         <Typography variant="h6" margin={3}>
           EDIT NOTE
         </Typography>
-        <Box sx={{ marginBottom: 2, width: "80%" }}>
+        <Box sx={{ marginBottom: 4, width: "80%" }}>
           <TextField
             label="Note Title"
             variant="outlined"
@@ -154,7 +168,29 @@ const EditNote = () => {
               },
             }}
           />
+          <IconButton onClick={handleClick}>
+            <HelpOutlineIcon />
+          </IconButton>
         </Box>
+
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          sx={{
+            width: "90%",
+          }}
+        >
+          <Typography sx={{ p: 2, fontStyle: "italic" }}>
+            In order for other users to be able to view your note, please refer
+            to them by their username within the note content.
+          </Typography>
+        </Popover>
         <Box sx={{ margin: 2, width: "80%" }}>
           <FormControl fullWidth sx={{ margin: 1 }}>
             <Typography variant="body1" sx={{ marginBottom: 2 }}>

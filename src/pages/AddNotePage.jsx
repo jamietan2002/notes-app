@@ -28,7 +28,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import { Help } from "@mui/icons-material";
 
 const AddNote = () => {
   const { state } = useLocation();
@@ -139,7 +138,7 @@ const AddNote = () => {
         <Typography variant="h6" margin={3}>
           ADD NOTE
         </Typography>
-        <Box sx={{ marginBottom: 2, width: "80%" }}>
+        <Box sx={{ marginBottom: 4, width: "80%" }}>
           <TextField
             label="Note Title"
             variant="outlined"
@@ -155,7 +154,7 @@ const AddNote = () => {
             }}
           />
         </Box>
-        <Box sx={{ marginBottom: 3, width: "80%" }}>
+        <Box sx={{ marginBottom: 2, width: "80%" }}>
           <TextField
             label="e.g. I need to complete the slides. Timothy needs to work on the report..."
             variant="outlined"
