@@ -101,7 +101,7 @@ const Home = () => {
       >
         <Grid container spacing={3}>
           <Box sx={{ flexDirection: "column", padding: "50px" }}>
-            <Typography variant="h6" sx={{ marginLeft: "25px" }}>
+            <Typography variant="h6" sx={{ margin: "20px" }}>
               My Notes
             </Typography>
             <Box sx={{ flexDirection: "column" }}>
@@ -142,7 +142,7 @@ const Home = () => {
           </Box>
 
           <Box sx={{ flexDirection: "column", padding: "50px" }}>
-            <Typography variant="h6" sx={{ marginLeft: "20px" }}>
+            <Typography variant="h6" sx={{ margin: "20px" }}>
               Tagged Notes
             </Typography>
             <Box sx={{ flexDirection: "column" }}>
