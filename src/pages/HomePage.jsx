@@ -113,7 +113,7 @@ const Home = () => {
               sx={{
                 borderRadius: "30px",
               }}
-              fullWidth="true"
+              fullWidth
             >
               + Add Note
             </Button>

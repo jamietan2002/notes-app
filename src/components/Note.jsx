@@ -69,17 +69,18 @@ const Note = ({
       content: content,
       tags: tags,
     };
+    setAnchorEl(false);
     navigate("/editNote", { state: note });
   };
 
   const handleDelete = () => {
     deleteNote(id);
     handleClose();
-    window.location.reload();
   };
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const handleCloseDeleteDialog = () => {
+    setAnchorEl(false);
     setOpenDeleteDialog(false);
   };
 
