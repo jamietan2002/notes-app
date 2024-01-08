@@ -15,20 +15,37 @@ import Register from "./pages/auth/RegisterPage";
 import AddNote from "./pages/AddNotePage";
 import SubmitNote from "./pages/SubmitNotePage";
 import EditNote from "./pages/EditNotePage";
+import ErrorPage from "./pages/ErrorPage";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./theme";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      {/* <Route index element={<Header />} /> */}
-      <Route path="home" element={<Home />} />
-      <Route path="login" element={<Login />} />
-      <Route path="register" element={<Register />} />
-      <Route path="addNote" element={<AddNote />} />
-      <Route path="editNote" element={<EditNote />} />
-      <Route path="submitNote" element={<SubmitNote />} />
-      <Route path="/" element={<Login />} />
+      <Route path="home" element={<Home />} errorElement={<ErrorPage />} />
+      <Route path="login" element={<Login />} errorElement={<ErrorPage />} />
+      <Route
+        path="register"
+        element={<Register />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path="addNote"
+        element={<AddNote />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path="editNote"
+        element={<EditNote />}
+        errorElement={<ErrorPage />}
+      />
+      <Route
+        path="submitNote"
+        element={<SubmitNote />}
+        errorElement={<ErrorPage />}
+      />
+      <Route path="/" element={<Login />} errorElement={<ErrorPage />} />
+      <Route path="*" element={<ErrorPage />} />
     </Route>
   )
 );

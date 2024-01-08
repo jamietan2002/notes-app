@@ -24,17 +24,13 @@ import {
 } from "firebase/auth";
 import Header from "../components/nav/Header";
 import createNote from "../functions/createNote";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, redirect } from "react-router-dom";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 const AddNote = () => {
-  const { state } = useLocation();
   const [users, setUsers] = useState([]);
-  const [title, setTitle] = useState(state.title);
-  const [content, setContent] = useState(state.content);
-  const [tags, setTags] = useState(state.tags);
   const userRef = collection(FIREBASE_DB, "users");
   const [currentUser, setCurrentUser] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -79,11 +75,16 @@ const AddNote = () => {
         };
         getUsers();
       } else {
-        console.log("user not signed in");
+        alert("you are not logged in");
+        navigate("/login");
       }
     });
   }, []);
+  const { state } = useLocation();
 
+  const [title, setTitle] = useState(state.title);
+  const [content, setContent] = useState(state.content);
+  const [tags, setTags] = useState(state.tags);
   const onSubmit = async (title, content, tags) => {
     // Create new note object and save to database
     setIsLoading(true);
