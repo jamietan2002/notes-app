@@ -29,6 +29,8 @@ import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import deleteNote from "../functions/deleteNote";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -121,8 +123,12 @@ const Note = ({
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleEdit}>Edit</MenuItem>
-              <MenuItem onClick={handleDeleteDialog}>Delete</MenuItem>
+              <MenuItem onClick={handleEdit}>
+                <EditOutlinedIcon sx={{ mr: 2 }} /> Edit
+              </MenuItem>
+              <MenuItem onClick={handleDeleteDialog}>
+                <DeleteOutlineOutlinedIcon sx={{ mr: 2 }} /> Delete
+              </MenuItem>
               <Dialog open={openDeleteDialog} onClose={handleCloseDeleteDialog}>
                 <DialogTitle>Are you sure you want to delete?</DialogTitle>
                 <DialogContent>
