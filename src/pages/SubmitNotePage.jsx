@@ -71,7 +71,7 @@ const SubmitNote = () => {
       content: state.content,
       tags: state.tags,
     };
-    navigate("/AddNote", { state: note });
+    navigate("/EditNote", { state: note });
   };
 
   return (
