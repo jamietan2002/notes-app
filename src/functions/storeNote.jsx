@@ -15,6 +15,10 @@ const storeNote = async (toStore) => {
   const lines = summary.split("\n");
   const summaryMap = {};
   for (const line of lines) {
+    console.log(line);
+    if (line.trim() === "") {
+      continue;
+    }
     const [name, text] = line.split(": ", 2);
     const trimmedName = name.trim().replace(/^\d+\.\s*/, "");
 

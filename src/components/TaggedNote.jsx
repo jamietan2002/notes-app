@@ -22,8 +22,6 @@ import {
   ListItem,
 } from "@mui/material";
 import { getAuth } from "firebase/auth";
-import { collection, getDocs, query } from "firebase/firestore";
-import { FIREBASE_DB } from "../firebaseConfig";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -170,7 +168,6 @@ const TaggedNote = ({
               ))}
             </ul>
           </Typography>
-          <Typography>{username}</Typography>
         </CardContent>
       </Collapse>
     </Card>
