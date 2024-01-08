@@ -42,11 +42,14 @@ const Home = () => {
                 ...doc.data(),
                 id: doc.id,
               }));
-              //user.email
+
+              noteData = noteData.sort((a, b) => b.createdDate - a.createdDate);
+
               let authorNotes = noteData.filter((note) =>
                 note.author.includes(user.email)
               );
               setNotes(authorNotes);
+
               let tagData = noteData.filter((note) =>
                 note.tags.includes(user.email)
               );
@@ -80,17 +83,28 @@ const Home = () => {
               My Notes
             </Typography>
             <Box sx={{ flexDirection: "column" }}>
-              {notes.map((note) => (
-                <Note
-                  id={note.id}
-                  title={note.title}
-                  summarised={note.summarised}
-                  author={note.author}
-                  content={note.content}
-                  createdDate={note.createdDate}
-                  tags={note.tags}
-                />
-              ))}
+              {notes.length > 0 ? (
+                notes.map((note) => (
+                  <Note
+                    key={note.id}
+                    id={note.id}
+                    title={note.title}
+                    summarised={note.summarised}
+                    author={note.author}
+                    content={note.content}
+                    createdDate={note.createdDate}
+                    tags={note.tags}
+                  />
+                ))
+              ) : (
+                <Typography
+                  variant="body1"
+                  sx={{ fontStyle: "italic", margin: "30px" }}
+                >
+                  You don't have any notes yet. Create your first note to get
+                  started!
+                </Typography>
+              )}
             </Box>
             <Button
               variant="text"
@@ -110,17 +124,27 @@ const Home = () => {
               Tagged Notes
             </Typography>
             <Box sx={{ flexDirection: "column" }}>
-              {tagNotes.map((note) => (
-                <TaggedNote
-                  id={note.id}
-                  title={note.title}
-                  summarised={note.summarised}
-                  author={note.author}
-                  content={note.content}
-                  createdDate={note.createdDate}
-                  tags={note.tags}
-                />
-              ))}
+              {tagNotes.length > 0 ? (
+                tagNotes.map((note) => (
+                  <TaggedNote
+                    key={note.id}
+                    id={note.id}
+                    title={note.title}
+                    summarised={note.summarised}
+                    author={note.author}
+                    content={note.content}
+                    createdDate={note.createdDate}
+                    tags={note.tags}
+                  />
+                ))
+              ) : (
+                <Typography
+                  variant="body1"
+                  sx={{ fontStyle: "italic", margin: "30px" }}
+                >
+                  You haven't been tagged in any notes yet.
+                </Typography>
+              )}
             </Box>
           </Box>
         </Grid>

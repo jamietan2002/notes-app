@@ -28,7 +28,7 @@ const router = createBrowserRouter(
       <Route path="addNote" element={<AddNote />} />
       <Route path="editNote" element={<EditNote />} />
       <Route path="submitNote" element={<SubmitNote />} />
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Login />} />
     </Route>
   )
 );

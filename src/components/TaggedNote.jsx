@@ -14,7 +14,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
 import { IconButton, Menu, MenuItem, ListItemText } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import { collection, getDocs, query } from "firebase/firestore";
+import { FIREBASE_DB } from "../firebaseConfig";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -36,6 +38,31 @@ const TaggedNote = ({
   content,
   tags,
 }) => {
+  //auth
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const userEmail = user.email;
+  const [currentUser, setCurrentUser] = useState("");
+  //get username
+  const getNotes = async () => {
+    const q = query(collection(FIREBASE_DB, "users"));
+    await getDocs(q)
+      .then((user) => {
+        let userData = user.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        let currentUser = userData.filter((user) =>
+          user.email.includes(userEmail)
+        );
+        setCurrentUser(currentUser[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  getNotes();
+
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -50,13 +77,7 @@ const TaggedNote = ({
             {author.charAt(0).toUpperCase()}
           </Avatar>
         }
-        action={
-          <>
-            {/* <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton> */}
-          </>
-        }
+        action={<></>}
         title={
           <Typography variant="h6" fontWeight="600">
             {title}
@@ -152,6 +173,7 @@ const TaggedNote = ({
               ))}
             </ul>
           </Typography>
+          <Typography>{currentUser.username}</Typography>
         </CardContent>
       </Collapse>
     </Card>
