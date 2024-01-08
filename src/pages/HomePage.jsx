@@ -5,7 +5,7 @@ import { collection, getDocs, query } from "firebase/firestore";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from ".././theme";
 import Header from "../components/nav/Header";
-import { Box, Container, Typography, Grid, Button } from "@mui/material";
+import { Box, IconButton, Typography, Grid, Button } from "@mui/material";
 import Note from "../components/Note";
 import TaggedNote from "../components/TaggedNote";
 import {
@@ -14,7 +14,7 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 const Home = () => {
   const collectionRef = collection(FIREBASE_DB, "notes");
   const [notes, setNotes] = useState([]);
@@ -103,7 +103,16 @@ const Home = () => {
           <Box sx={{ flexDirection: "column", padding: "50px" }}>
             <Typography variant="h6" sx={{ margin: "20px" }}>
               My Notes
+              <IconButton
+                onClick={() => navigate("/addNote", { state: emptyNote })}
+                sx={{
+                  marginLeft: "5px",
+                }}
+              >
+                <AddCircleOutlinedIcon />
+              </IconButton>
             </Typography>
+
             <Box sx={{ flexDirection: "column" }}>
               {notes.length > 0 ? (
                 notes.map((note) => (
