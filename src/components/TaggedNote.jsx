@@ -13,7 +13,14 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
-import { IconButton, Menu, MenuItem, ListItemText } from "@mui/material";
+import {
+  IconButton,
+  Menu,
+  MenuItem,
+  ListItemText,
+  List,
+  ListItem,
+} from "@mui/material";
 import { getAuth } from "firebase/auth";
 import { collection, getDocs, query } from "firebase/firestore";
 import { FIREBASE_DB } from "../firebaseConfig";
@@ -37,32 +44,12 @@ const TaggedNote = ({
   createdDate,
   content,
   tags,
+  currentUser,
 }) => {
   //auth
   const auth = getAuth();
-  const user = auth.currentUser;
-  const userEmail = user.email;
-  const [currentUser, setCurrentUser] = useState("");
-  //get username
-  const getNotes = async () => {
-    const q = query(collection(FIREBASE_DB, "users"));
-    await getDocs(q)
-      .then((user) => {
-        let userData = user.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        let currentUser = userData.filter((user) =>
-          user.email.includes(userEmail)
-        );
-        setCurrentUser(currentUser[0]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  getNotes();
-
+  const username = currentUser.username;
+  console.log(username);
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -97,13 +84,23 @@ const TaggedNote = ({
           fontWeight={400}
           lineHeight={2}
         >
-          <ul>
-            {Object.entries(summarised).map(([key, value]) => (
-              <li key={key}>
-                <strong>{key}:</strong> {value}
-              </li>
+          <List component="ol" sx={{ listStyle: "none" }}>
+            {Object.entries(summarised).map(([key, value], index) => (
+              <ListItem
+                key={key}
+                sx={{
+                  ...(key.toLowerCase() === username
+                    ? { backgroundColor: "#ffffe0" } // Highlight matching entry
+                    : {}),
+                }}
+              >
+                <ListItemText
+                  primary={`${index + 1}. ${key.toLocaleUpperCase()}`}
+                  secondary={value}
+                />
+              </ListItem>
             ))}
-          </ul>
+          </List>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -173,7 +170,7 @@ const TaggedNote = ({
               ))}
             </ul>
           </Typography>
-          <Typography>{currentUser.username}</Typography>
+          <Typography>{username}</Typography>
         </CardContent>
       </Collapse>
     </Card>

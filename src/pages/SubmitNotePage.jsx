@@ -61,7 +61,7 @@ const SubmitNote = () => {
     };
     console.log(newNote);
     await storeNote(newNote).then(() => {
-      navigate("/");
+      navigate("/home");
     });
   };
   const onCancel = async () => {

@@ -21,6 +21,7 @@ const Home = () => {
   const auth = getAuth();
   const navigate = useNavigate();
   const [tagNotes, setTagNotes] = useState([]);
+  const [currentUser, setCurrentUser] = useState("");
 
   const emptyNote = {
     title: "",
@@ -60,6 +61,27 @@ const Home = () => {
             });
         };
         getNotes();
+
+        //get username
+        const getUser = async () => {
+          const q = query(collection(FIREBASE_DB, "users"));
+          await getDocs(q)
+            .then((userDoc) => {
+              let userData = userDoc.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+              }));
+              let curr = userData.filter((subUser) =>
+                subUser.email.includes(user.email)
+              );
+              console.log(curr);
+              setCurrentUser(curr[0]);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        };
+        getUser();
       } else {
         console.log("user not signed in");
       }
@@ -135,6 +157,7 @@ const Home = () => {
                     content={note.content}
                     createdDate={note.createdDate}
                     tags={note.tags}
+                    currentUser={currentUser}
                   />
                 ))
               ) : (

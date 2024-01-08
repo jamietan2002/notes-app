@@ -8,6 +8,7 @@ import {
   FormControlLabel,
   CircularProgress,
   Typography,
+  Stack,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React from "react";
@@ -184,7 +185,21 @@ const EditNote = () => {
                       }}
                     />
                   }
-                  label={user.email}
+                  label={
+                    <Stack direction="row" alignItems="center" spacing={2}>
+                      <Typography variant="body1">{user.email}</Typography>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: "text.secondary",
+                          fontSize: "14px",
+                          fontStyle: "italic",
+                        }}
+                      >
+                        (username: {user.username})
+                      </Typography>
+                    </Stack>
+                  }
                 />
               ))}
             </FormGroup>

@@ -13,7 +13,14 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
-import { IconButton, Menu, MenuItem } from "@mui/material";
+import {
+  IconButton,
+  Menu,
+  MenuItem,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -165,13 +172,23 @@ const Note = ({
           fontWeight={400}
           lineHeight={2}
         >
-          <ul>
-            {Object.entries(summarised).map(([key, value]) => (
-              <li key={key}>
-                <strong>{key}:</strong> {value}
-              </li>
+          <List component="ol" sx={{ listStyle: "none" }}>
+            {Object.entries(summarised).map(([key, value], index) => (
+              <ListItem
+                key={key}
+                sx={{
+                  ...(key.toLowerCase() === "myself"
+                    ? { backgroundColor: "#ffffe0" } // Highlight matching entry
+                    : {}),
+                }}
+              >
+                <ListItemText
+                  primary={`${index + 1}. ${key.toLocaleUpperCase()}`}
+                  secondary={value}
+                />
+              </ListItem>
             ))}
-          </ul>
+          </List>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

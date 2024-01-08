@@ -10,12 +10,13 @@ import {
 const notesRef = doc(collection(FIREBASE_DB, "notes"));
 
 const storeNote = async (toStore) => {
-  const summary = toStore.summarised;
+  let summary = toStore.summarised;
+  summary = summary.trim();
   const lines = summary.split("\n");
   const summaryMap = {};
   for (const line of lines) {
     const [name, text] = line.split(": ", 2);
-    const trimmedName = name.trim();
+    const trimmedName = name.trim().replace(/^\d+\.\s*/, "");
 
     summaryMap[trimmedName] = text.trim();
   }
