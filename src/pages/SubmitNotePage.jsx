@@ -18,6 +18,7 @@ import {
 import Header from "../components/nav/Header";
 import storeNote from "../functions/storeNote";
 import { useNavigate, useLocation } from "react-router-dom";
+import SummaryTable from "../components/SummaryTable";
 
 const SubmitNote = () => {
   const { state } = useLocation();
@@ -74,6 +75,10 @@ const SubmitNote = () => {
     navigate("/EditNote", { state: note });
   };
 
+  const handleSummaryChange = (newSummary) => {
+    setSummary(newSummary);
+  };
+
   return (
     <>
       <Header />
@@ -101,7 +106,7 @@ const SubmitNote = () => {
           <Typography variant="h6" margin={1}>
             SUMMARY
           </Typography>
-          <Box sx={{ marginBottom: 2, width: "90%" }}>
+          {/* <Box sx={{ marginBottom: 2, width: "90%" }}>
             <TextField
               label="Edit Summary..."
               variant="outlined"
@@ -118,7 +123,11 @@ const SubmitNote = () => {
                 },
               }}
             />
-          </Box>
+          </Box> */}
+          <SummaryTable
+            summaryMap={summary}
+            onSummaryChange={handleSummaryChange}
+          />
           <Grid container spacing={2}>
             <Grid item xs={12} display="flex" justifyContent="space-evenly">
               <Button

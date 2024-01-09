@@ -19,9 +19,23 @@ const createNote = async (data) => {
     messages: [{ role: "system", content: prompt }],
     model: "gpt-4",
   });
-  const summary = completion.choices[0].message.content;
+  const summary = completion.choices[0].message.content.trim();
 
-  return summary;
+  //convert paragraph summary to a map
+  const lines = summary.split("\n");
+  const summaryMap = {};
+  for (const line of lines) {
+    if (line.trim() === "") {
+      continue;
+    }
+    const [name, text] = line.split(": ", 2);
+    const trimmedName = name.trim().replace(/^\d+\.\s*/, "");
+
+    summaryMap[trimmedName] = text.trim();
+  }
+
+  console.log(summaryMap);
+  return summaryMap;
 };
 
 export default createNote;
