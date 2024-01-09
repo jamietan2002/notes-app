@@ -18,7 +18,7 @@ import {
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-import { doc, setDoc } from "firebase/firestore";
+import { useMediaQuery } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -43,25 +43,49 @@ const Login = () => {
       return false;
     }
   };
+  const isSmallScreen = useMediaQuery("(max-width: 1000px)");
 
   return (
     <>
       <Box
         sx={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}
       >
-        {/* Header */}
-        <Box sx={{ bgcolor: "primary", color: "black", padding: "20px" }}>
-          <Typography variant="h4">Login</Typography>
-        </Box>
-
-        {/* Main content */}
-        <Container maxWidth="lg" sx={{ padding: "16px" }}>
-          <Grid container spacing={2}>
+        <Container
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: isSmallScreen ? "80%" : "30%",
+            position: isSmallScreen ? "absolute" : "absolute",
+            top: "40%",
+            left: "50%",
+            transform: isSmallScreen
+              ? "translate(-50%, -10%)"
+              : "translate(-50%, -50%)",
+          }}
+        >
+          <Grid
+            container
+            spacing={4}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src="/sticky-note.png"
+              alt="Notes App Logo"
+              style={{ width: 50, height: 50, marginRight: "10px" }}
+            />
+            <Typography variant="h5" sx={{}}>
+              Notes
+            </Typography>
             {/* Email field */}
             <Grid item xs={12}>
               <TextField
                 label="Email"
-                variant="filled"
+                variant="outlined"
                 fullWidth
                 value={email}
                 color="info"
@@ -73,7 +97,7 @@ const Login = () => {
             <Grid item xs={12}>
               <TextField
                 label="Password"
-                variant="filled"
+                variant="outlined"
                 fullWidth
                 type="password"
                 value={password}
