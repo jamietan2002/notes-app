@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { FIREBASE_DB } from "../firebaseConfig";
 import { useState, useEffect } from "react";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from ".././theme";
 import Header from "../components/nav/Header";
@@ -36,13 +36,15 @@ const Home = () => {
       if (user) {
         console.log(user.email);
         const getNotes = async () => {
-          const q = query(collectionRef, orderBy("createdDate", "desc"));
+          const q = query(collectionRef);
           await getDocs(q)
             .then((note) => {
               let noteData = note.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
               }));
+
+              noteData = noteData.sort((a, b) => b.createdDate - a.createdDate);
 
               let authorNotes = noteData.filter((note) =>
                 note.author.includes(user.email)

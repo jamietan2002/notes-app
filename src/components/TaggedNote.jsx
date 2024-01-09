@@ -55,7 +55,7 @@ const TaggedNote = ({
   };
 
   return (
-    <Card sx={{ maxWidth: 450, margin: 3, borderRadius: "16px" }}>
+    <Card sx={{ maxWidth: 450, margin: 3, borderRadius: "16px", padding: 1 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[300] }} aria-label="recipe">
