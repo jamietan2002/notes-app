@@ -25,13 +25,12 @@ const storeNote = async (toStore) => {
     summaryMap[trimmedName] = text.trim();
   }
 
-  const createdNote = {
+  let createdNote = {
     title: toStore.title,
     content: toStore.content,
     tags: toStore.tags,
     author: toStore.author,
     summarised: summaryMap,
-    createdDate: Timestamp.fromDate(new Date()),
   };
 
   if (toStore.id) {
@@ -39,7 +38,8 @@ const storeNote = async (toStore) => {
     console.log(toStore.id);
     await updateDoc(doc(FIREBASE_DB, "notes", toStore.id), createdNote);
   } else {
-    await setDoc(notesRef, createdNote);
+    (createdNote.createdDate = Timestamp.fromDate(new Date())),
+      await setDoc(notesRef, createdNote);
   }
   return toStore.content;
 };
