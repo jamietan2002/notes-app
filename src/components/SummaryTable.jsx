@@ -49,16 +49,33 @@ const SummaryTable = ({ summaryMap, onSummaryChange }) => {
           boxShadow: 1,
           borderRadius: "10px",
           bgcolor: "#F5F5F5",
+          marginTop: 4,
         }}
       >
         <Table
           sx={{ minWidth: 650, borderRadius: 20 }}
           aria-label="Editable summary table"
         >
-          <TableHead>
-            <TableRow sx={{ borderBottom: "5px solid rgba(0, 0, 0, 0.12)" }}>
-              <TableCell>Username</TableCell>
-              <TableCell>Note</TableCell>
+          <TableHead sx={{ backgroundColor: "grey.200" }}>
+            <TableRow
+              sx={{
+                borderBottom: "2px solid rgba(0, 0, 0, 0.12)",
+              }}
+            >
+              <TableCell
+                sx={{
+                  fontSize: "16px",
+                }}
+              >
+                Username
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontSize: "16px",
+                }}
+              >
+                Note
+              </TableCell>
               <TableCell /> {/* For delete button */}
             </TableRow>
           </TableHead>
