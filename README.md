@@ -15,7 +15,7 @@ A collaborative note-taking app for efficient knowledge sharing.
 ### Installation
     
 - Clone the repository
-``` git clone https://github.com/your-username/notes-app.git ```
+``` git clone https://github.com/jamietan2002/notes-app.git ```
 
  - Install dependencies
 ```npm install```
