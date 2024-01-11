@@ -3,12 +3,22 @@
 A collaborative note-taking app for efficient knowledge sharing.
 
 ### Features
-    - Shared notes: Create notes that can be shared with specific users.
-    - ChatGPT-powered summaries: Get concise summaries of notes for quick understanding.
-    - Home dashboard: View a personalized feed of notes shared with you.
+- Shared notes: Create notes that can be shared with specific users.
+- ChatGPT-powered summaries: Get concise summaries of notes for quick understanding.
+- Home dashboard: View a personalized feed of notes shared with you.
 
 ### Tech Stack
-    - Frontend: React, Material UI (MUI), Vite
-    - Backend: Firebase (Firestore, Authentication, Hosting)
-    - Text summarization: ChatGPT
+- Frontend: React, Material UI (MUI), Vite
+- Backend: Firebase (Firestore, Authentication, Hosting)
+- Text summarization: ChatGPT
+    
+### Installation
+    
+- Clone the repository
+``` git clone https://github.com/your-username/notes-app.git ```
 
+ - Install dependencies
+```npm install```
+
+- Run development server
+```npm run dev```
