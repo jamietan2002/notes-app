@@ -16,7 +16,7 @@ import {
   browserSessionPersistence,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDocs, collection } from "firebase/firestore";
 import { useMediaQuery } from "@mui/material";
 
 const Register = () => {
@@ -38,6 +38,19 @@ const Register = () => {
   const handleSignUp = async (email, password, username) => {
     if (!isValidEmail(email) || !isValidPassword(password) || !username) {
       alert("invalid credentials");
+      return;
+    }
+
+    username = username.toLower;
+
+    const querySnapshot = await getDocs(collection(FIREBASE_DB, "users"));
+    console.log(querySnapshot);
+    const existingUser = querySnapshot.docs.find(
+      (doc) => doc.data().username === username
+    );
+
+    if (existingUser) {
+      alert("Username already exists. Please choose a different one.");
       return;
     }
     //firebase auth
