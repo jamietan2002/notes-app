@@ -1,10 +1,14 @@
-# notes-app
+# Notes App
 
-# React + Vite
+A collaborative note-taking app for efficient knowledge sharing.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Features
+    - Shared notes: Create notes that can be shared with specific users.
+    - ChatGPT-powered summaries: Get concise summaries of notes for quick understanding.
+    - Home dashboard: View a personalized feed of notes shared with you.
 
-Currently, two official plugins are available:
+### Tech Stack
+    - Frontend: React, Material UI (MUI), Vite
+    - Backend: Firebase (Firestore, Authentication, Hosting)
+    - Text summarization: ChatGPT
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
