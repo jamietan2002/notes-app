@@ -57,7 +57,6 @@ const EditNote = () => {
     setPersistence(auth, browserSessionPersistence).then(() => {
       const user = auth.currentUser;
       if (user) {
-        console.log(user.email);
         setCurrentUser(user.email);
         const getUsers = async () => {
           const q = query(userRef);

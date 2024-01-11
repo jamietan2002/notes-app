@@ -47,7 +47,6 @@ const TaggedNote = ({
   //auth
   const auth = getAuth();
   const username = currentUser.username;
-  console.log(username);
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {

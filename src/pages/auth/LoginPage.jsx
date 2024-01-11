@@ -34,7 +34,6 @@ const Login = () => {
       );
       const user = userCredential.user;
 
-      console.log("Successfully logged in");
       console.log(user);
       navigate("/home");
     } catch (error) {

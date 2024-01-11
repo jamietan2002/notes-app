@@ -42,9 +42,7 @@ const SubmitNote = () => {
     setPersistence(auth, browserSessionPersistence).then(() => {
       const user = auth.currentUser;
       if (user) {
-        console.log(user.email);
         setCurrentUser(user.email);
-        console.log(state);
       } else {
         console.log("user not signed in");
       }
@@ -60,13 +58,11 @@ const SubmitNote = () => {
       summarised: summary,
       ...(state.id && { id: state.id }),
     };
-    console.log(newNote);
     await storeNote(newNote).then(() => {
       navigate("/home");
     });
   };
   const onCancel = async () => {
-    console.log("cancelling");
     const note = {
       title: state.title,
       content: state.content,

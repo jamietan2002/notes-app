@@ -33,8 +33,6 @@ const SummaryTable = ({ summaryMap, onSummaryChange }) => {
     setSummary((prevSummary) => {
       const newSummary = { ...prevSummary };
       delete newSummary[key];
-
-      console.log(newSummary);
       onSummaryChange(newSummary);
 
       return newSummary;

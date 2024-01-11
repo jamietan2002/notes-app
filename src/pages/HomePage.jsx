@@ -34,7 +34,6 @@ const Home = () => {
     setPersistence(auth, browserSessionPersistence).then(() => {
       const user = auth.currentUser;
       if (user) {
-        console.log(user.email);
         const getNotes = async () => {
           const q = query(collectionRef, orderBy("createdDate", "desc"));
           await getDocs(q)
@@ -72,7 +71,6 @@ const Home = () => {
               let curr = userData.filter((subUser) =>
                 subUser.email.includes(user.email)
               );
-              console.log(curr);
               setCurrentUser(curr[0]);
             })
             .catch((err) => {

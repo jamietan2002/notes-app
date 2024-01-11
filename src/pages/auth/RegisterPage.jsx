@@ -36,9 +36,7 @@ const Register = () => {
   };
 
   const handleSignUp = async (email, password, username) => {
-    console.log(email);
     if (!isValidEmail(email) || !isValidPassword(password) || !username) {
-      console.log("invalid email/ password/ username");
       alert("invalid credentials");
       return;
     }

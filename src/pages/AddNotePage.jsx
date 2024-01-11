@@ -55,7 +55,6 @@ const AddNote = () => {
       const user = auth.currentUser;
       if (user) {
         setCurrentUser(user.email);
-        console.log(currentUser);
         const getUsers = async () => {
           const q = query(userRef);
           await getDocs(q)
@@ -105,7 +104,6 @@ const AddNote = () => {
       setIsLoading(false);
       return;
     }
-    console.log(newNote);
 
     await createNote(newNote).then((summary) => {
       console.log(summary);
