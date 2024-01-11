@@ -23,5 +23,5 @@ A collaborative note-taking app for efficient knowledge sharing.
 - Run development server
 ```npm run dev```
 
-###Live site
-(notes-app)[https://notes-app-dsta.web.app/login]
+### Live site
+[notes-app](https://notes-app-dsta.web.app/login)
