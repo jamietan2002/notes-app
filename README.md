@@ -16,8 +16,8 @@ A collaborative note-taking app for efficient knowledge sharing.
 ### Live site
 [notes-app](https://notes-app-dsta.web.app/login)
 
-# Developer Guide
-## Setting up the firebase backend (firestore, firebase hosting, firebase authentication)
+## Developer Guide
+Setting up the firebase backend (firestore, firebase hosting, firebase authentication)
 
 ### Installation
     
