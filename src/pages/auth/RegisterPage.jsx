@@ -36,12 +36,20 @@ const Register = () => {
   };
 
   const handleSignUp = async (email, password, username) => {
-    if (!isValidEmail(email) || !isValidPassword(password) || !username) {
-      alert("invalid credentials");
-      return;
+    if (!isValidEmail(email)) {
+      alert("Invalid email.")
+      return
+    }
+    if (!isValidPassword(password)) {
+      alert("Invalid password. Password must be at least 8 characters long.")
+      return
+    }
+    if (username === undefined) {
+      alert("Invalid username.")
+      return
     }
 
-    username = username.toLower;
+    username = username.toLowerCase();
 
     const querySnapshot = await getDocs(collection(FIREBASE_DB, "users"));
     console.log(querySnapshot);
@@ -51,6 +59,7 @@ const Register = () => {
 
     if (existingUser) {
       alert("Username already exists. Please choose a different one.");
+      console.log("existing username")
       return;
     }
     //firebase auth
